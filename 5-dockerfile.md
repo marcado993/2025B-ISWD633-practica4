@@ -53,17 +53,24 @@ docker build -t <nombre imagen>:<tag> .
 ### Ejecutar el archivo Dockerfile y construir una imagen en la versión 1.0
 No olvides verificar en qué directorio se encuentra el archivo Dockerfile
 ```
-
+docker build -t practica4:v1 -f "C:\Users\INTEL\Desktop\practicas\2025B-ISWD633-practica4\Dockerfile" "C:\Users\INTEL\Desktop\practicas\2025B-ISWD633-practica4"
 ```
 
 **¿Cuántos pasos se han ejecutado?**
 # RESPONDER 
+9 pasos 
+![alt text](image.png)
 
 ### Inspeccionar la imagen creada
 # COMPLETAR CON UNA CAPTURA
+![alt text](image-2.png)
+
 
 **Modificar el archivo index.html para incluir su nombre y luego crear una nueva versión de la imagen anterior**
 **¿Cuántos pasos se han ejecutado? ¿Observa algo diferente en la creación de la imagen**
+![alt text](image-1.png)
+
+En si han sido los mismo 9 pasos, sin embargo se ha demorado menos de 3 segundos, y sale en caché el proceso de copiar el html
 
 ## Mecanismo de caché
 Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso de construcción y evitar la repetición de pasos que no han cambiado. Cada instrucción en un Dockerfile crea una capa en la imagen final. Docker intenta reutilizar las capas de una construcción anterior si no han cambiado, lo que reduce significativamente el tiempo de construcción.
@@ -75,14 +82,15 @@ Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso
 
 ### Crear un contenedor a partir de las imagen creada, mapear todos los puertos
 ```
-
+docker run -d --name practica4 -P practica4:v1
 ```
 
 ### ¿Con que puerto host se está realizando el mapeo?
-# COMPLETAR CON LA RESPUESTA
+80/tcp -> 0.0.0.0:32768
+![alt text](image-3.png)
 
 **¿Qué es una imagen huérfana?**
-# COMPLETAR CON LA RESPUESTA
+Una imagen huérfana (dangling image) es una imagen que ya no tiene etiqueta y no está asociada a ningún contenedor — normalmente queda tras reconstrucciones o cambios en el Dockerfile y ocupa espacio inútil.
 
 ### Identificar imágenes huérfanas
 ```
